@@ -1,6 +1,7 @@
 package com.ustc.learn;
 
 import com.ustc.learn.beans.Car;
+import com.ustc.learn.beans.CircularBeanA;
 import com.ustc.learn.beans.MyTestBean;
 import com.ustc.learn.factories.CarFactoryBean;
 import org.springframework.beans.factory.BeanFactory;
@@ -11,7 +12,7 @@ public class DemoApplication {
 		BeanFactory bf = new ClassPathXmlApplicationContext("ApplicationContext.xml");
 		MyTestBean bean = (MyTestBean) bf.getBean("myTestBean", "Construct args in getBean");
 		System.out.println(bean.getTestStr());
-		CarFactoryBean car = (CarFactoryBean) bf.getBean("&car");
-		System.out.println(car);
+		CircularBeanA ca = (CircularBeanA) bf.getBean("circularBeanA");
+		System.out.println(ca);
 	}
 }

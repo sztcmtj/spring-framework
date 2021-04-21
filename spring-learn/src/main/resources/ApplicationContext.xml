@@ -3,7 +3,7 @@
 	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
 
-	<bean name="myTestBean" class="com.ustc.learn.beans.MyTestBean" scope="prototype">
+	<bean name="myTestBean" class="com.ustc.learn.beans.MyTestBean" scope="prototype" init-method="init">
 		<constructor-arg value="Construct args in xml"/>
 	</bean>
 
@@ -11,11 +11,11 @@
 		<property name="carInfo" value="超级跑车,400,2000000"/>
 	</bean>
 
-	<bean name="circularBeanA" class="com.ustc.learn.beans.CircularBeanA">
-		<property name="b" ref="circularBeanB"/>
-	</bean>
+	<bean name="circularBeanA" class="com.ustc.learn.beans.CircularBeanA" autowire="byType"/>
 
 	<bean name="circularBeanB" class="com.ustc.learn.beans.CircularBeanB">
 		<property name="a" ref="circularBeanA"/>
 	</bean>
+
+	<bean name="testBean" class="com.ustc.learn.beans.TestBean"/>
 </beans>

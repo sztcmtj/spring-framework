@@ -1,12 +1,7 @@
 package com.ustc.learn.beans;
 
-public class MyTestBean {
+public class TestBean {
 	private String testStr = "testStr";
-
-	public MyTestBean(String testStr) {
-		this.testStr = testStr;
-	}
-
 	public String getTestStr() {
 		return testStr;
 	}
@@ -15,7 +10,7 @@ public class MyTestBean {
 		this.testStr = testStr;
 	}
 
-	public void init() {
-		System.out.println("Init method...");
+	public void test() {
+		System.out.println("test");
 	}
 }
