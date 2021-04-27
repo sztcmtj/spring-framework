@@ -1,8 +1,10 @@
 package com.ustc.learn;
 
+import com.ustc.learn.aspect.AService;
 import com.ustc.learn.beans.Car;
 import com.ustc.learn.beans.CircularBeanA;
 import com.ustc.learn.beans.MyTestBean;
+import com.ustc.learn.beans.TestBean;
 import com.ustc.learn.factories.CarFactoryBean;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
@@ -14,5 +16,9 @@ public class DemoApplication {
 		System.out.println(bean.getTestStr());
 		CircularBeanA ca = (CircularBeanA) bf.getBean("circularBeanA");
 		System.out.println(ca);
+		TestBean testBean = (TestBean) bf.getBean("testBean");
+		testBean.test();
+		AService a = (AService)bf.getBean("aService");
+
 	}
 }
