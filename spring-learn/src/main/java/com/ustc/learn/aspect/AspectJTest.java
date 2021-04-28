@@ -5,6 +5,7 @@ import org.aspectj.lang.annotation.*;
 
 @Aspect
 public class AspectJTest {
+	// 在所有类的test方法前后都打印
 	@Pointcut("execution(* *.test(..))")
 	public void test() {
 
