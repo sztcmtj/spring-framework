@@ -307,6 +307,7 @@ public abstract class AopUtils {
 			return candidateAdvisors;
 		}
 		List<Advisor> eligibleAdvisors = new ArrayList<>();
+		// 首先处理Introduction类型的增强
 		for (Advisor candidate : candidateAdvisors) {
 			if (candidate instanceof IntroductionAdvisor && canApply(candidate, clazz)) {
 				eligibleAdvisors.add(candidate);
@@ -315,10 +316,12 @@ public abstract class AopUtils {
 		boolean hasIntroductions = !eligibleAdvisors.isEmpty();
 		for (Advisor candidate : candidateAdvisors) {
 			if (candidate instanceof IntroductionAdvisor) {
+				// Introduction类型的增强已经处理
 				// already processed
 				continue;
 			}
 			if (canApply(candidate, clazz, hasIntroductions)) {
+				// 对于普通bean的处理
 				eligibleAdvisors.add(candidate);
 			}
 		}

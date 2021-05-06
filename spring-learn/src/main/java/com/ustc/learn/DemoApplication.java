@@ -2,11 +2,20 @@ package com.ustc.learn;
 
 import com.ustc.learn.aspect.AspectJTest;
 import com.ustc.learn.beans.TestBean;
+import com.ustc.learn.impl.UserServiceImpl;
+import com.ustc.learn.proxy.MyInvocationHandler;
+import com.ustc.learn.services.UserService;
 import org.springframework.beans.factory.BeanFactory;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.lang.reflect.Proxy;
+
 public class DemoApplication {
 	public static void main(String[] args) {
+		UserService userService = new UserServiceImpl();
+		MyInvocationHandler myInvocationHandler = new MyInvocationHandler(userService);
+		UserService proxy = (UserService) myInvocationHandler.getProxy();
+		proxy.add();
 		BeanFactory bf = new ClassPathXmlApplicationContext("ApplicationContext.xml");
 //		MyTestBean bean = (MyTestBean) bf.getBean("myTestBean", "Construct args in getBean");
 //		System.out.println(bean.getTestStr());

@@ -92,7 +92,7 @@ public class BeanFactoryAspectJAdvisorsBuilder {
 					// 获取所有的beanName
 					String[] beanNames = BeanFactoryUtils.beanNamesForTypeIncludingAncestors(
 							this.beanFactory, Object.class, true, false);
-					// 循环所有的beanName找出对应的增强方法
+					// 循环所有的beanName，找出对应的切面类以及其定义的增强方法
 					for (String beanName : beanNames) {
 						// 不合法的bean略过
 						if (!isEligibleBean(beanName)) {
@@ -105,11 +105,12 @@ public class BeanFactoryAspectJAdvisorsBuilder {
 						if (beanType == null) {
 							continue;
 						}
-						// 如果存在Aspect注解
+						// 如果是一个切面类
 						if (this.advisorFactory.isAspect(beanType)) {
 							aspectNames.add(beanName);
 							AspectMetadata amd = new AspectMetadata(beanType, beanName);
 							if (amd.getAjType().getPerClause().getKind() == PerClauseKind.SINGLETON) {
+								// 以该切面类的beanName作为构造参数创建factory
 								MetadataAwareAspectInstanceFactory factory =
 										new BeanFactoryAspectInstanceFactory(this.beanFactory, beanName);
 								// 解析标记AspectJ注解中的Advisor方法
