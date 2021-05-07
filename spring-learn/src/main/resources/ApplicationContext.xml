@@ -18,6 +18,8 @@
 	</bean>
 
 	<bean name="test" class="com.ustc.learn.beans.TestBean"/>
+	<bean name="testJdk" class="com.ustc.learn.beans.TestBeanJdk"/>
+	<bean class="com.ustc.learn.aspect.AspectJTestJdk"/>
 	<bean class="com.ustc.learn.aspect.AspectJTest"/>
 
 </beans>
