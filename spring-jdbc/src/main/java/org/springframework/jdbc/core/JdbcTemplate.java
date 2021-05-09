@@ -609,16 +609,20 @@ public class JdbcTemplate extends JdbcAccessor implements JdbcOperations {
 			logger.debug("Executing prepared SQL statement" + (sql != null ? " [" + sql + "]" : ""));
 		}
 
+		// 获取数据库连接
 		Connection con = DataSourceUtils.getConnection(obtainDataSource());
 		PreparedStatement ps = null;
 		try {
 			ps = psc.createPreparedStatement(con);
+			// 应用用户设定的输入参数
 			applyStatementSettings(ps);
+			// 调用回调函数
 			T result = action.doInPreparedStatement(ps);
 			handleWarnings(ps);
 			return result;
 		}
 		catch (SQLException ex) {
+			// 释放数据库连接，避免当异常转换器没有被初始化的时候出现潜在的连接池死锁
 			// Release Connection early, to avoid potential connection pool deadlock
 			// in the case when the exception translator hasn't been initialized yet.
 			if (psc instanceof ParameterDisposer) {
@@ -862,6 +866,7 @@ public class JdbcTemplate extends JdbcAccessor implements JdbcOperations {
 		return updateCount(execute(psc, ps -> {
 			try {
 				if (pss != null) {
+					// 设置PreparedStatement所需的全部参数
 					pss.setValues(ps);
 				}
 				int rows = ps.executeUpdate();

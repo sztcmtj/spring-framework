@@ -59,12 +59,15 @@ public class ArgumentTypePreparedStatementSetter implements PreparedStatementSet
 	public void setValues(PreparedStatement ps) throws SQLException {
 		int parameterPosition = 1;
 		if (this.args != null && this.argTypes != null) {
+			// 遍历每个参数以作类型匹配及转换
 			for (int i = 0; i < this.args.length; i++) {
 				Object arg = this.args[i];
+				// 如果是集合类型，并且对应的SQL类型不是ARRAY，则需要进入集合类内部递归递归解析集合内部属性
 				if (arg instanceof Collection && this.argTypes[i] != Types.ARRAY) {
 					Collection<?> entries = (Collection<?>) arg;
 					for (Object entry : entries) {
 						if (entry instanceof Object[]) {
+							// 如果在集合中有数组元素，由于对应的SQL类型不是ARRAY，则按单个元素进行设置
 							Object[] valueArray = ((Object[]) entry);
 							for (Object argValue : valueArray) {
 								doSetValue(ps, parameterPosition, this.argTypes[i], argValue);
@@ -72,6 +75,7 @@ public class ArgumentTypePreparedStatementSetter implements PreparedStatementSet
 							}
 						}
 						else {
+							// 集合中的元素类型不是数组
 							doSetValue(ps, parameterPosition, this.argTypes[i], entry);
 							parameterPosition++;
 						}

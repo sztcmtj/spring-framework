@@ -1,25 +1,27 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
-	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
-	<aop:aspectj-autoproxy/>
-	<bean name="myTestBean" class="com.ustc.learn.beans.MyTestBean" scope="prototype" init-method="init">
-		<constructor-arg value="Construct args in xml"/>
+	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!--配置数据源-->
+	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource" destroy-method="close">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+		<property name="url" value="jdbc:mysql://localhost:3306/spring_src?characterEncoding=UTF-8"/>
+		<property name="username" value="root"/>
+		<property name="password" value="mtj313"/>
+		<!--连接池启动时的初始值-->
+		<property name="initialSize" value="1"/>
+		<!--连接池的最大值-->
+		<property name="maxTotal" value="300"/>
+		<!--最大空闲值，当经过一个高峰时间后，连接池可以慢慢将已经用不到的连接释放一部分，一直减少到maxIdle为止-->
+		<property name="maxIdle" value="2"/>
+		<!--最小空闲值，当空闲的连接数少于阈值时，连接池就会预申请一些连接，一面洪峰来时来不及申请-->
+		<property name="minIdle" value="1"/>
 	</bean>
 
-	<bean id="car" class="com.ustc.learn.factories.CarFactoryBean">
-		<property name="carInfo" value="超级跑车,400,2000000"/>
+	<!--配置业务bean:PersonServiceBean-->
+	<bean id="userService" class="com.ustc.learn.impl.UserServiceImpl">
+		<!--向属性dataSource注入数据源-->
+		<property name="dataSource" ref="dataSource"/>
 	</bean>
-
-	<bean name="circularBeanA" class="com.ustc.learn.beans.CircularBeanA" autowire="byType"/>
-
-	<bean name="circularBeanB" class="com.ustc.learn.beans.CircularBeanB">
-		<property name="a" ref="circularBeanA"/>
-	</bean>
-
-	<bean name="test" class="com.ustc.learn.beans.TestBean"/>
-	<bean name="testJdk" class="com.ustc.learn.beans.TestBeanJdk"/>
-	<bean class="com.ustc.learn.aspect.AspectJTestJdk"/>
-	<bean class="com.ustc.learn.aspect.AspectJTest"/>
-
 </beans>

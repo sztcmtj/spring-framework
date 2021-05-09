@@ -6,6 +6,19 @@ public class User {
 	private int age;
 	private String sex;
 
+	@Override
+	public String toString() {
+		return "User{" +
+				"id=" + id +
+				", name='" + name + '\'' +
+				", age=" + age +
+				", sex='" + sex + '\'' +
+				'}';
+	}
+
+	public User() {
+	}
+
 	public User(int id, String name, int age, String sex) {
 		this.id = id;
 		this.name = name;

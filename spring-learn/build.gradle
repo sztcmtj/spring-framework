@@ -17,6 +17,8 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
     compile(project(":spring-aspects"))
     compile(project(":spring-aop"))
+    compile ('org.apache.commons:commons-dbcp2:2.8.0')
+    runtime ('mysql:mysql-connector-java:5.1.24')
 }
 
 test {
