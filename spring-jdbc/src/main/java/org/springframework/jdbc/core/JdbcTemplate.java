@@ -371,6 +371,7 @@ public class JdbcTemplate extends JdbcAccessor implements JdbcOperations {
 		Connection con = DataSourceUtils.getConnection(obtainDataSource());
 		Statement stmt = null;
 		try {
+			// 使用Connection创建Statement而不是PreparedStatement
 			stmt = con.createStatement();
 			applyStatementSettings(stmt);
 			T result = action.doInStatement(stmt);

@@ -31,4 +31,13 @@ public class UserServiceImpl implements UserService {
 		List<User> list = jdbcTemplate.query("select * from user", new UserRowMapper());
 		return list;
 	}
+
+	@Override
+	public List<User> getUsersByAge() {
+		List<User> list = jdbcTemplate.query("select * from user where age=?",
+				new Object[]{20}, new int[]{Types.INTEGER}, new UserRowMapper());
+		return list;
+	}
+
+
 }

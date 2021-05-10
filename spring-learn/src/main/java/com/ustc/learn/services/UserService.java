@@ -8,4 +8,6 @@ public interface UserService {
 	public void save(User user);
 
 	public List<User> getUsers();
+
+	public List<User> getUsersByAge();
 }

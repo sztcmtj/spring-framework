@@ -13,12 +13,12 @@ public class DemoApplication {
 	public static void main(String[] args) {
 		ApplicationContext act = new ClassPathXmlApplicationContext("ApplicationContext.xml");
 		UserService userService = (UserService)act.getBean("userService");
-		User user = new User();
-		user.setName("张三");
-		user.setAge(20);
-		user.setSex("男");
-		// 保存一条记录
-		userService.save(user);
+//		User user = new User();
+//		user.setName("张三");
+//		user.setAge(20);
+//		user.setSex("男");
+//		// 保存一条记录
+//		userService.save(user);
 
 		List<User> users = userService.getUsers();
 		System.out.println("++++++++得到所有User+++++++++");
