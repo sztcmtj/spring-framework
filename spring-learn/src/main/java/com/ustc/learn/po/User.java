@@ -4,13 +4,15 @@ public class User {
 	private int id;
 	private String name;
 	private int age;
-	private String sex;
 
-	public User(int id, String name, int age, String sex) {
-		this.id = id;
+	public User(String name, int age) {
+		super();
 		this.name = name;
 		this.age = age;
-		this.sex = sex;
+	}
+
+	public User() {
+		super();
 	}
 
 	public int getId() {
@@ -35,13 +37,5 @@ public class User {
 
 	public void setAge(int age) {
 		this.age = age;
-	}
-
-	public String getSex() {
-		return sex;
-	}
-
-	public void setSex(String sex) {
-		this.sex = sex;
 	}
 }
