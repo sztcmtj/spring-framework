@@ -2,7 +2,17 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:aop="http://www.springframework.org/schema/aop"
 	   xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop https://www.springframework.org/schema/aop/spring-aop.xsd">
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
-
+	<bean id="dataSource" class="org.apache.commons.dbcp2.BasicDataSource">
+		<property name="driverClassName" value="com.mysql.jdbc.Driver"/>
+		<property name="url" value="jdbc:mysql://localhost:3306/spring_src?useUnicode=true&amp;
+		characterEncoding=UTF-8&amp;zeroDateTimeBehavior=convertToNull"/>
+		<property name="username" value="root"/>
+		<property name="password" value="mtj313"/>
+		<property name="maxTotal" value="100"/>
+		<property name="maxIdle" value="30"/>
+		<property name="maxWaitMillis" value="500"/>
+		<property name="defaultAutoCommit" value="true"/>
 	</bean>
+
+	<bean id="sqlSessionFactory" class="org.mybatis.Spring."
 </beans>

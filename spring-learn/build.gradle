@@ -17,7 +17,8 @@ dependencies {
     testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine'
     compile(project(":spring-aspects"))
     compile(project(":spring-aop"))
-    implementation group: 'org.mybatis', name: 'mybatis', version: '3.5.3'
+    compile 'org.mybatis:mybatis:3.5.7'
+    compile ('org.apache.commons:commons-dbcp2:2.8.0')
     runtime ('mysql:mysql-connector-java:5.1.24')
 }
 
