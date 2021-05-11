@@ -18,7 +18,7 @@ dependencies {
     compile(project(":spring-aspects"))
     compile(project(":spring-aop"))
     implementation group: 'org.mybatis', name: 'mybatis', version: '3.5.3'
-
+    runtime ('mysql:mysql-connector-java:5.1.24')
 }
 
 test {

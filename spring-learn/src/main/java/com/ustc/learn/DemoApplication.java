@@ -7,6 +7,7 @@ import java.lang.reflect.Proxy;
 
 public class DemoApplication {
 	public static void main(String[] args) {
-		BeanFactory bf = new ClassPathXmlApplicationContext("ApplicationContext.xml");
+		//BeanFactory bf = new ClassPathXmlApplicationContext("ApplicationContext.xml");
+		
 	}
 }
