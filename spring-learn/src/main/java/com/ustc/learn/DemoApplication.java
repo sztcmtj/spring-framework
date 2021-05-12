@@ -1,13 +1,13 @@
 package com.ustc.learn;
 
-import org.springframework.beans.factory.BeanFactory;
+import com.ustc.learn.mapper.UserMapper;
+import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
-
-import java.lang.reflect.Proxy;
 
 public class DemoApplication {
 	public static void main(String[] args) {
-		//BeanFactory bf = new ClassPathXmlApplicationContext("ApplicationContext.xml");
-		
+		ApplicationContext context = new ClassPathXmlApplicationContext("ApplicationContext.xml");
+		UserMapper userDao = (UserMapper) context.getBean("userMapper");
+		System.out.println(userDao.getUser(9));
 	}
 }
