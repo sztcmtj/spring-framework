@@ -223,10 +223,12 @@ public abstract class AopUtils {
 	 */
 	public static boolean canApply(Pointcut pc, Class<?> targetClass, boolean hasIntroductions) {
 		Assert.notNull(pc, "Pointcut must not be null");
+		// 此时的pc表示TransactionAttributeSourcePointcut
 		if (!pc.getClassFilter().matches(targetClass)) {
 			return false;
 		}
 
+		// pc.getMethodMatcher()返回的正是自身(this)
 		MethodMatcher methodMatcher = pc.getMethodMatcher();
 		if (methodMatcher == MethodMatcher.TRUE) {
 			// No need to iterate the methods if we're matching any method anyway...
@@ -240,8 +242,10 @@ public abstract class AopUtils {
 
 		Set<Class<?>> classes = new LinkedHashSet<>();
 		if (!Proxy.isProxyClass(targetClass)) {
+			// 若不是代理类，则加入到classes
 			classes.add(ClassUtils.getUserClass(targetClass));
 		}
+		// 获取所有的接口类
 		classes.addAll(ClassUtils.getAllInterfacesForClassAsSet(targetClass));
 
 		for (Class<?> clazz : classes) {
